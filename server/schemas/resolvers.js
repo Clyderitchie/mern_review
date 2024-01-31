@@ -1,10 +1,14 @@
 const { User, QRCode } = require('../models');
+const { signToken } = require('../utils/auth');
 
 module.exports = {
 	Mutation: {
 		createUser: async (parent, args) => {
 			try {
-				return await User.create(args);
+				const user =  await User.create(args);
+				const token = signToken(user);
+
+				return { user, token }
 			} catch (error) {
 				console.error(error);
 				throw new Error(error);

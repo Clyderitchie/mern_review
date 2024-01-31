@@ -19,8 +19,13 @@ module.exports = gql`
 		createdAt: String
 	}
 
+	type Auth {
+		user: User
+		token: ID
+	}
+
 	type Mutation {
-		createUser(name: String!, username: String!, password: String! ): User
+		createUser(name: String!, username: String!, password: String! ): Auth
 		createQRCode: QRCode
 		scanQRCode: QRCode
 	}
